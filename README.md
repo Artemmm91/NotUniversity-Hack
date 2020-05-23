@@ -23,7 +23,7 @@ pip install virtualenv
 mkdir ~/venvs
 cd ~/venvs
 virtualenv -p /usr/bin/python3 mlh_hack_env
-source ~/venvs/dj_venv/bin/activate
+source ~/venvs/mlh_hack_env/bin/activate
 ```
 Или создайте автоматически в PyCharm
 - Перейдите в папку проекта (предположим, что она находится прямо в домашней): 
