@@ -7,17 +7,23 @@
 -------------
 
 - Установите все необходимые пакеты:
+Если у вас Линукс:
 ```
 sudo apt-get install git
 sudo apt-get install python3-virtualenv virtualenv  
 ```
+VirtualEnv можно скачать и через pip, а git через сайт
+```
+pip install virtualenv
+```
+
 - Склонируйте проект с GitHub
-- Создайте и запустите отдельное виртуальное окружение:
+- Создайте и запустите отдельное виртуальное окружение(указывать собственную папку расположения питона):
 ```
 mkdir ~/venvs
 cd ~/venvs
 virtualenv -p /usr/bin/python3 mlh_hack_env
-source ~/venvs/dj_venv/bin/activate
+source ~/venvs/mlh_hack_env/bin/activate
 ```
 Или создайте автоматически в PyCharm
 - Перейдите в папку проекта (предположим, что она находится прямо в домашней): 
@@ -26,12 +32,12 @@ cd ~/NotUnoversity-Hack
 ```
 - Установите все необходимые пакеты: 
 ```
-pip install -r requirements.txt
+pip install -r mlh/requirements.txt
 ```
 - Запустите процесс инициализации БД: 
 ```
-python manage.py makemigrations
-python manage.py migrate
+python mlh/manage.py makemigrations
+python mlh/manage.py migrate
 ```
 
 - Настройте проект в PyCharm:
