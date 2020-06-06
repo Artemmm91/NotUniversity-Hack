@@ -1,0 +1,12 @@
+{% extends "../partials/base.html" %}
+{% block content %}
+    {% load bootstrap4 %}
+
+    <h1>Add goal page</h1>
+    <form method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <button type="submit" class="btn btn-primary">Add goal</button>
+    </form>
+
+{% endblock %}

@@ -1,2 +1,4 @@
 .idea
 mlh/db.sqlite3
+mlh/mlh/__pycache__/
+mlh/web/__pycache__/
