@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from .sports import CHOICES
 
 
 class AuthForm(forms.Form):
@@ -22,14 +23,6 @@ class RecoverForm(forms.Form):
 
 class ImageForm(forms.Form):
     img = forms.ImageField(label='Avatar')
-
-
-CHOICES = (
-    ('Running', 'Running'),
-    ('Swimming', 'Swimming'),
-    ('Light athletics', 'Light athletics'),
-    ('Heavy athletics', 'Heavy athletics'),
-)
 
 
 class AddGoalForm(forms.Form):
