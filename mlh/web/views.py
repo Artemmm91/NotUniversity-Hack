@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 import os
 from string import ascii_letters, digits
 
-from .forms import AuthForm, ImageForm, SignUpForm, RecoverForm, AddGoalForm
+from .forms import AuthForm, ImageForm, SignUpForm, RecoverForm, AddGoalForm, SearchForm
 from .models import Avatar, ChooseGoals
 
 # Create your views here.
@@ -143,3 +143,30 @@ def adding_goal(request):
         form = AddGoalForm()
         context = {'form': form}
         return render(request, 'web/add_goal.html', context)
+
+
+def target_users(lst):
+    return lst[:min(len(lst), 20)]
+
+
+@login_required
+def search_sport(request):
+    context = {'ans': []}
+    if request.method == 'POST':
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            lst = ChooseGoals.objects.filter(user=request.user)
+            picked = form.cleaned_data.get('search')
+            if picked in lst:
+                lst_ans = target_users(ChooseGoals.objects.filter(goal=picked))
+                context['ans'] = lst_ans
+                return render(request, 'web/find_sport.html', context)
+            else:
+                context['error'] = True
+                return render(request, 'web/find_sport.html', context)
+        else:
+            return redirect('search/')
+    else:
+        form = SearchForm()
+        context = {'form': form}
+        return render(request, 'web/find_sport.html', context)

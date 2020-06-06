@@ -26,5 +26,9 @@ class ImageForm(forms.Form):
 
 
 class AddGoalForm(forms.Form):
-    picked = forms.ChoiceField(choices=CHOICES, required=True)
-    level = forms.IntegerField(label='Level', max_value=5, min_value=1)
+    picked = forms.ChoiceField(choices=CHOICES, required=True, label="Choose your goal sport")
+    level = forms.IntegerField(max_value=5, min_value=1, label="Choose your honest level in this sport")
+
+
+class SearchForm(forms.Form):
+    search = forms.ChoiceField(choices=CHOICES, required=True, label="Choose a sport you want to upgrade")

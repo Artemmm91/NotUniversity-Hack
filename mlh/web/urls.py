@@ -12,4 +12,5 @@ urlpatterns = [
     path('profile/', views.user_profile, name='user_profile'),
     path('signin/res_pass/', views.reset_password, name='reset_password'),
     path('addgoals/', views.adding_goal, name='add_goal'),
+    path('search/', views.search_sport, name='search_sport')
 ]
