@@ -22,3 +22,16 @@ class RecoverForm(forms.Form):
 
 class ImageForm(forms.Form):
     img = forms.ImageField(label='Avatar')
+
+
+CHOICES = (
+    ('a', 'Running'),
+    ('b', 'Swimming'),
+    ('c', 'Light athletics'),
+    ('d', 'Heavy athletics'),
+)
+
+
+class AddGoalForm(forms.Form):
+    picked = forms.ChoiceField(choices=CHOICES, required=True)
+    level = forms.IntegerField(label='Level', max_value=5, min_value=1)
