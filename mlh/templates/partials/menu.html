@@ -15,7 +15,10 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'web:user_profile' %}">My Profile</a>
                     </li>
-                    <li class="nav-item">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'web:search_sport' %}">Search sport</a>
+                </li>
+                <li class="nav-item">
                         <a class="nav-link" href="{% url 'web:signout' %}">Log out ({{ request.user.username }})</a>
                     </li>
                 {% else %}

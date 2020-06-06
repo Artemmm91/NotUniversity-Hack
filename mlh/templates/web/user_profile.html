@@ -4,7 +4,7 @@
     <div class="row">
         <h1 class="col-5">Hi, {{ username }}</h1>
         {% load static %}
-        <img src="{% static avatar %}" width="100" height="100" alt="avatar">
+        <img alt="avatar" height="100" src="{% static avatar %}" width="100">
         <form method="POST" enctype="multipart/form-data" class="col-md-5">
             {% csrf_token %}
             <p>Change avatar<input type="file" name="img" class="form-control-file"></p>

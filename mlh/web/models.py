@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 class Avatar(models.Model):
     user = models.OneToOneField(User, on_delete=models.PROTECT)
-    img = models.ImageField(upload_to='mlh/web/static/avatars/', default='mlh/web/static/avatars/default.png')
+    img = models.ImageField(upload_to='web/static/avatars/', default='web/static/avatars/default.png')
 
 
 class ChooseGoals(models.Model):

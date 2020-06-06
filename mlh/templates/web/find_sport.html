@@ -1,0 +1,26 @@
+{% extends "../partials/base.html" %}
+{% block content %}
+    {% load bootstrap4 %}
+
+    <h1>Search sport page</h1>
+<form method="post">
+    {% csrf_token %}
+    {% if request.method == 'POST' %}
+        {% if error %}
+            <h4>Oops :(</h4><br/>
+        {% else %}
+            {% for var in ans %}
+                <li>
+                    <label>{{ var.name }} </label>
+                    <label>{{ goal.level }} </label>
+                </li>
+            {% endfor %}
+        {% endif %}
+    {% else %}
+        {% bootstrap_form form %}
+        <button type="submit" class="btn btn-primary">Search sport</button>
+    {% endif %}
+
+    </form>
+
+{% endblock %}

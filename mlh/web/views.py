@@ -95,8 +95,8 @@ def user_profile(request):
     else:
         image = Avatar.objects.filter(user=request.user).first()
         goals = ChooseGoals.objects.filter(user=request.user)
-        image = str(image.img) if image is not None else 'mlh/web/static/avatars/default.png'
-        context['avatar'] = image[15:]
+        image = str(image.img) if image is not None else 'web/static/avatars/default.png'
+        context['avatar'] = image[11:]
         context['username'] = request.user.username
         context['goals'] = goals
         return render(request, 'web/user_profile.html', context)
