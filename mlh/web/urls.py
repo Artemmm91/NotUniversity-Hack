@@ -13,5 +13,6 @@ urlpatterns = [
     path('signin/res_pass/', views.reset_password, name='reset_password'),
     path('addgoals/', views.adding_goal, name='add_goal'),
     path('search/', views.search_sport, name='search_sport'),
-    path('profile/<int:id>', views.show_profile, name='show_profile')
+    path('profile/<int:id>', views.show_profile, name='show_profile'),
+    path('profile/<int:id>/add', views.add_friend, name='add_friend'),
 ]
