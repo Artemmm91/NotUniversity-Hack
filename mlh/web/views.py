@@ -81,6 +81,7 @@ def user_profile(request):
         form = ImageForm(request.POST, request.FILES)
         if form.is_valid():
             image = Avatar.objects.filter(user=request.user).first()
+            #goals = ChooseGoals.objects.filter(user=request.user)
             if image is not None:
                 if str(image.img) != 'mlh/web/static/avatars/default.png':
                     os.remove(str(image.img))
@@ -93,9 +94,11 @@ def user_profile(request):
             return redirect('/profile')
     else:
         image = Avatar.objects.filter(user=request.user).first()
+        goals = ChooseGoals.objects.filter(user=request.user)
         image = str(image.img) if image is not None else 'mlh/web/static/avatars/default.png'
         context['avatar'] = image[15:]
         context['username'] = request.user.username
+        context['goals'] = goals
         return render(request, 'web/user_profile.html', context)
 
 

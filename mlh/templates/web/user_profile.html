@@ -15,5 +15,17 @@
     </div>
     <hr>
     <a class="btn btn-outline-primary" href="{% url 'web:change_password' %}" role="button">Change Password</a>
+    <a class="btn btn-outline-primary" href="{% url 'web:add_goal' %}" role="button">Add Goal</a><br/>
+    <p>
+    <h4 class="col-2"> My goals:</h4>
+    <ul>
+    {% for goal in goals %}
+        <li>
+            <label>{{ goal.goal }} </label>
+            <label>{{ goal.level }} </label>
+        </li>
+    {% endfor %}
+    </ul>
+    </p>
 
 {% endblock %}
