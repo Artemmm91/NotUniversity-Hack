@@ -12,4 +12,9 @@ class ChooseGoals(models.Model):
     goal = models.CharField(max_length=50)
     level = models.IntegerField()
 
+
+class Friends(models.Model):
+    out_user = models.ForeignKey(User, on_delete=models.PROTECT, related_name="creator")
+    in_user = models.ForeignKey(User, on_delete=models.PROTECT, related_name="victim")
+
 # Create your models here.

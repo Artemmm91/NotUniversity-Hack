@@ -10,7 +10,7 @@ import os
 from string import ascii_letters, digits
 
 from .forms import AuthForm, ImageForm, SignUpForm, RecoverForm, AddGoalForm, SearchForm
-from .models import Avatar, ChooseGoals
+from .models import Avatar, ChooseGoals, Friends
 
 # Create your views here.
 
@@ -134,8 +134,14 @@ def adding_goal(request):
         if form.is_valid():
             picked = form.cleaned_data.get('picked')
             level = form.cleaned_data.get('level')
-            cg = ChooseGoals(user=request.user, goal=picked, level=level)
-            cg.save()
+            lst = ChooseGoals.objects.filter(user=request.user, goal=picked)
+            if len(lst):
+                lst = lst.first()
+                lst.level = level
+                lst.save()
+            else:
+                cg = ChooseGoals(user=request.user, goal=picked, level=level)
+                cg.save()
             return redirect('/')
         else:
             return redirect('/')
@@ -157,7 +163,7 @@ def search_sport(request):
         if form.is_valid():
             lst = ChooseGoals.objects.filter(user=request.user)
             picked = form.cleaned_data.get('search')
-            if picked in lst:
+            if picked in [x.goal for x in lst]:
                 lst_ans = target_users(ChooseGoals.objects.filter(goal=picked))
                 context['ans'] = lst_ans
                 return render(request, 'web/find_sport.html', context)
@@ -170,3 +176,30 @@ def search_sport(request):
         form = SearchForm()
         context = {'form': form}
         return render(request, 'web/find_sport.html', context)
+
+
+@login_required
+def show_profile(request, id):
+    context = {'id': id}
+    lst = User.objects.filter(id=id)
+    if not len(lst):
+        context['error'] = True
+        return redirect('/')
+    target_user = lst.first()
+    user_friends = Friends.object.filter(out_user=request.user)
+    context['is_friend'] = target_user in user_friends
+    context['friend'] = target_user
+    return render(request, 'web/show_profile.html', context)
+
+
+@login_required
+def add_friend(request, id):
+    lst = User.objects.filter(id=id)
+    if not len(lst):
+        return redirect('/')
+    target_user = lst.first()
+    user_friends = Friends.object.filter(out_user=request.user)
+    if id != request.user.id and target_user not in user_friends:
+        friendship = Friends(out_user=request.user, in_user=target_user)
+        friendship.save()
+    return redirect('/profile/{}'.format(id))
