@@ -1,0 +1,15 @@
+{% extends "../partials/base.html" %}
+{% block content %}
+{% load bootstrap4 %}
+    <h1>Recovery</h1>
+    <form method="post">
+        {% csrf_token %}
+        {% bootstrap_form name_form %}
+        {% buttons %}
+            <button type="submit" class="btn btn-primary">
+                Ok
+            </button>
+        {% endbuttons %}
+    </form>
+
+{% endblock %}

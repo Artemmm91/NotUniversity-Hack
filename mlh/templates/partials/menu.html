@@ -11,6 +11,21 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'web:index' %}">Home </a>
                 </li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'web:user_profile' %}">My Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'web:signout' %}">Log out ({{ request.user.username }})</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'web:signin' %}">Log in</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'web:signup' %}">Sign Up</a>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </nav>

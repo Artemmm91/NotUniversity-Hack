@@ -1,0 +1,19 @@
+{% extends "../partials/base.html" %}
+{% block content %}
+{% load bootstrap4 %}
+    <div class="row">
+        <h1 class="col-5">Hi, {{ username }}</h1>
+        {% load static %}
+        <img src="{% static avatar %}" width="100" height="100" alt="avatar">
+        <form method="POST" enctype="multipart/form-data" class="col-md-5">
+            {% csrf_token %}
+            <p>Change avatar<input type="file" name="img" class="form-control-file"></p>
+            <p>
+                <button type="submit" class="btn btn-primary">Upload</button>
+            </p>
+        </form>
+    </div>
+    <hr>
+    <a class="btn btn-outline-primary" href="{% url 'web:change_password' %}" role="button">Change Password</a>
+
+{% endblock %}

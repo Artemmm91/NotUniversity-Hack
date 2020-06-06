@@ -1,0 +1,14 @@
+{% extends "../partials/base.html" %}
+{% block content %}
+    {% load bootstrap4 %}
+    <h1>Log in page</h1>
+    <form action="{% url 'web:signin' %}" method="post">
+        {% csrf_token %}
+        {% bootstrap_form auth_form %}
+        <button type="submit" class="btn btn-primary">
+            Log in
+        </button>
+        <a class="btn btn-outline-primary" href="{% url 'web:reset_password' %}" role="button">Forgot password?</a>
+    </form>
+
+{% endblock %}
