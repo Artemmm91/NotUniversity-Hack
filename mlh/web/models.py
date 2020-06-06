@@ -7,13 +7,9 @@ class Avatar(models.Model):
     img = models.ImageField(upload_to='mlh/web/static/avatars/', default='mlh/web/static/avatars/default.png')
 
 
-class Goals(models.Model):
-    sport_goal = models.CharField(max_length=50)
-
-
 class ChooseGoals(models.Model):
     user = models.ForeignKey(User, on_delete=models.PROTECT)
-    goal = models.ForeignKey(Goals, on_delete=models.PROTECT)
+    goal = models.CharField(max_length=50)
     level = models.IntegerField()
 
 # Create your models here.

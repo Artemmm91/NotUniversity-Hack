@@ -9,8 +9,8 @@ from django.contrib.auth.models import User
 import os
 from string import ascii_letters, digits
 
-from .forms import AuthForm, ImageForm, SignUpForm, RecoverForm
-from .models import Avatar
+from .forms import AuthForm, ImageForm, SignUpForm, RecoverForm, AddGoalForm
+from .models import Avatar, ChooseGoals
 
 # Create your views here.
 
@@ -122,3 +122,21 @@ def reset_password(request):
         form = RecoverForm()
         context['name_form'] = form
     return render(request, 'web/rec_pass.html', context)
+
+
+@login_required
+def adding_goal(request):
+    if request.method == 'POST':
+        form = AddGoalForm(request.POST)
+        if form.is_valid():
+            picked = form.cleaned_data.get('picked')
+            level = form.cleaned_data.get('level')
+            cg = ChooseGoals(user=request.user, goal=picked, level=level)
+            cg.save()
+            return redirect('/')
+        else:
+            return redirect('/')
+    else:
+        form = AddGoalForm()
+        context = {'form': form}
+        return render(request, 'web/add_goal.html', context)

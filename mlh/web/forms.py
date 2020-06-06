@@ -25,10 +25,10 @@ class ImageForm(forms.Form):
 
 
 CHOICES = (
-    ('a', 'Running'),
-    ('b', 'Swimming'),
-    ('c', 'Light athletics'),
-    ('d', 'Heavy athletics'),
+    ('Running', 'Running'),
+    ('Swimming', 'Swimming'),
+    ('Light athletics', 'Light athletics'),
+    ('Heavy athletics', 'Heavy athletics'),
 )
 
 
