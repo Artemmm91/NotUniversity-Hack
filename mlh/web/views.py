@@ -151,8 +151,20 @@ def adding_goal(request):
         return render(request, 'web/add_goal.html', context)
 
 
-def target_users(lst):
-    return lst[:min(len(lst), 20)]
+def sign(x):
+    if x == 0:
+        return 0
+    if x < 0:
+        return -1
+    return 1
+
+
+def target_users(user0, lst):
+    loc = [[abs(x.level - user0.level), -sign(x.level - user0.level), x] for x in lst]
+    loc = sorted(loc)
+    loc.remove([0, 0, user0])
+    res = [x[2] for x in loc]
+    return res[:min(len(res), 20)]
 
 
 @login_required
@@ -164,7 +176,7 @@ def search_sport(request):
             lst = ChooseGoals.objects.filter(user=request.user)
             picked = form.cleaned_data.get('search')
             if picked in [x.goal for x in lst]:
-                lst_ans = target_users(ChooseGoals.objects.filter(goal=picked))
+                lst_ans = target_users(ChooseGoals.objects.filter(goal=picked, user=request.user).first(), ChooseGoals.objects.filter(goal=picked))
                 context['ans'] = lst_ans
                 return render(request, 'web/find_sport.html', context)
             else:
