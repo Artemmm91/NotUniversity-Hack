@@ -119,7 +119,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/mlh/web/static/'
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'

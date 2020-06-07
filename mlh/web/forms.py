@@ -5,8 +5,8 @@ from .sports import CHOICES
 
 
 class AuthForm(forms.Form):
-    username = forms.CharField(label='User')
-    password = forms.CharField(label='Password', widget=forms.PasswordInput())
+    username = forms.CharField(label='User', help_text='Your login')
+    password = forms.CharField(label='Password', widget=forms.PasswordInput(), help_text='Your password')
 
 
 class SignUpForm(UserCreationForm):
@@ -18,15 +18,15 @@ class SignUpForm(UserCreationForm):
 
 
 class RecoverForm(forms.Form):
-    username = forms.CharField(label='User')
+    username = forms.CharField(label='User', help_text='Your login to recover your password')
 
 
 class ImageForm(forms.Form):
-    img = forms.ImageField(label='Avatar')
+    img = forms.ImageField(label='Avatar', help_text='Image for your avatar')
 
 
 class AddGoalForm(forms.Form):
-    picked = forms.ChoiceField(choices=CHOICES, required=True, label="Choose your goal sport")
+    picked = forms.ChoiceField(choices=CHOICES, required=True, label="Choose your goal sport", help_text='The sport you want to improve')
     level = forms.IntegerField(max_value=5, min_value=1, label="Choose your honest level in this sport")
 
 
