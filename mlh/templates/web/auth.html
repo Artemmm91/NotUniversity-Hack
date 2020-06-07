@@ -5,10 +5,10 @@
     <form action="{% url 'web:signin' %}" method="post">
         {% csrf_token %}
         {% bootstrap_form auth_form %}
-        <button type="submit" class="btn btn-primary">
+        <button type="submit" class="btn btn-success">
             Log in
         </button>
-        <a class="btn btn-outline-primary" href="{% url 'web:reset_password' %}" role="button">Forgot password?</a>
+        <a class="btn btn-outline-success" href="{% url 'web:reset_password' %}" role="button">Forgot password?</a>
     </form>
 
 {% endblock %}

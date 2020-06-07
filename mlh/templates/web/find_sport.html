@@ -11,7 +11,7 @@
         {% else %}
             <ul class="list-group">
             {% for var in ans %}
-                <li>
+                <li class="list-group-item">
                     <label><a href="../profile/{{ var.user.id }}">{{ var.user }} </a></label>
                     <label>{{ var.level }} </label>
                 </li>
@@ -20,7 +20,7 @@
         {% endif %}
     {% else %}
         {% bootstrap_form form %}
-        <button type="submit" class="btn btn-primary">Search sport</button>
+        <button type="submit" class="btn btn-success">Search sport</button>
     {% endif %}
 
     </form>

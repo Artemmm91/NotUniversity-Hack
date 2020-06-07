@@ -7,7 +7,7 @@
     <p>
     <ul>
         {% for friend in friend_request %}
-            <li>
+            <li class="list-group-item">
                 {{ friend.out_user }}
                 <a href="../profile/requests/{{ friend.id }}/allow" class="btn btn-outline-success"> Allow </a>
                 <a href="{{ id }}/decline" class="btn btn-outline-danger"> Reject </a>

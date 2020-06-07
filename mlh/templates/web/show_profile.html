@@ -32,7 +32,7 @@
                             {% if is_requested %}
                                 <h4> Waiting for user response </h4>
                             {% else %}
-                                <a class="btn btn-outline-primary mt-3" href="{% url 'web:make_friend_request' friend.id %}" role="button">Add to friends list</a>
+                                <a class="btn btn-outline-success mt-3" href="{% url 'web:make_friend_request' friend.id %}" role="button">Add to friends list</a>
                             {% endif %}
                         {% endif %}
                 </div>

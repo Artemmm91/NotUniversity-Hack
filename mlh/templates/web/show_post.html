@@ -1,7 +1,7 @@
 {% extends "../partials/base.html" %}
 {% block content %}
 {% load bootstrap4 %}
-    <div class="jumbotron">
+    <div style="background:transparent !important" class="jumbotron" >
       <h1 class="display-4"> {{post.name}} </h1>
       <p class="lead">
           By {{post.user.username}}<br>
@@ -9,6 +9,7 @@
       </p>
       <hr class="my-4">
       <p>{{post.text}}</p>
+        <a href="../posts/" class="btn btn-success">Return</a>
     </div>
 
 {% endblock %}

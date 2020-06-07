@@ -27,17 +27,17 @@ class ImageForm(forms.Form):
 
 class AddGoalForm(forms.Form):
     picked = forms.ChoiceField(choices=CHOICES, required=True, label="Choose your goal sport", help_text='The sport you want to improve')
-    level = forms.IntegerField(max_value=5, min_value=1, label="Choose your honest level in this sport")
+    level = forms.IntegerField(max_value=100, min_value=1, label="Choose your honest level in this sport", help_text="Level of your skills")
 
 
 class SearchForm(forms.Form):
-    search = forms.ChoiceField(choices=CHOICES, required=True, label="Choose a sport you want to upgrade")
+    search = forms.ChoiceField(choices=CHOICES, required=True, label="Choose a sport you want to upgrade", help_text="Choose one of this sport goals")
 
 
 class DeleteGoalForm(forms.Form):
-    picked = forms.ChoiceField(choices=CHOICES, required=True, label="Choose your goal, that you want to delete")
+    picked = forms.ChoiceField(choices=CHOICES, required=True, label="Choose your goal, that you want to delete", help_text="Choose one of this sport goals")
 
 
 class AddPostForm(forms.Form):
-    name = forms.CharField(label='How would you like to name your post?')
-    text = forms.CharField(label='What would you like to post today?')
+    name = forms.CharField(label='How would you like to name your post?', help_text="You can write name or theme of your post")
+    text = forms.CharField(label='What would you like to post today?', help_text="Tell something about your sport program or about your feelings")
