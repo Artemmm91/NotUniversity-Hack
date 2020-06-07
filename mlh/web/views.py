@@ -160,11 +160,9 @@ def sign(x):
 
 
 def target_users(user0, lst):
-    loc = [[abs(x.level - user0.level), -sign(x.level - user0.level), x] for x in lst]
-    loc = sorted(loc)
-    loc.remove([0, 0, user0])
-    res = [x[2] for x in loc]
-    return res[:min(len(res), 20)]
+    loc = sorted(lst, key=lambda x: (abs(x.level - user0.level), sign(x.level - user0.level)))
+    loc.remove(user0)
+    return loc[:min(len(loc), 20)]
 
 
 @login_required
