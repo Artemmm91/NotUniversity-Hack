@@ -203,7 +203,7 @@ def show_profile(request, id):
     if len(user_requests):
         context['is_requested'] = True
     context['friend'] = target_user
-    context['goals'] = [x.goals for x in ChooseGoals.objects.filter(user=target_user)]
+    context['goals'] = ChooseGoals.objects.filter(user=target_user)
     context['avatar'] = Avatar.objects.filter(user=request.user).first()
     return render(request, 'web/show_profile.html', context)
 
@@ -219,7 +219,7 @@ def make_friend_request(request, id):
     if id != request.user.id and target_user not in user_friends and not len(user_requests):
         friendship = FriendRequests(out_user=request.user, in_user=target_user)
         friendship.save()
-    return redirect('profile/{}'.format(id))
+    return redirect('/profile/{}'.format(id))
 
 
 @login_required
