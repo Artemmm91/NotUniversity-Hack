@@ -3,9 +3,16 @@
 {% load bootstrap4 %}
 
 <div class = "row">
-    <ul class="list-group">
-      {% for friend in friend_requests %}
-        <li class="list-group-item"></li>
+    <h3> Your friend requests: </h3>
+    <ul>
+        {% for friend in friend_requests %}
+            <li>
+                {{ friend.out_user }}
+                <a href="/{{ id }}/allow" class="btn btn-outline-success"> Allow </a>
+                <a href="/{{ id }}/decline" class="btn btn-outline-danger"> Reject </a>
+            </li>
+
+        {% endfor%}
     </ul>
 </div>
 
