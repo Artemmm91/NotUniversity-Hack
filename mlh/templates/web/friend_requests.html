@@ -1,0 +1,12 @@
+{% extends "../partials/base.html" %}
+{% block content %}
+{% load bootstrap4 %}
+
+<div class = "row">
+    <ul class="list-group">
+      {% for friend in friend_requests %}
+        <li class="list-group-item"></li>
+    </ul>
+</div>
+
+{% endblock %}

@@ -17,4 +17,9 @@ class Friends(models.Model):
     out_user = models.ForeignKey(User, on_delete=models.PROTECT, related_name="creator")
     in_user = models.ForeignKey(User, on_delete=models.PROTECT, related_name="victim")
 
+
+class FriendRequests(models.Model):
+    out_user = models.ForeignKey(User, on_delete=models.PROTECT, related_name="creator_request")
+    in_user = models.ForeignKey(User, on_delete=models.PROTECT, related_name="victim_request")
+
 # Create your models here.

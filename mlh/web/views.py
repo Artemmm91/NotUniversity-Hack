@@ -10,7 +10,7 @@ import os
 from string import ascii_letters, digits
 
 from .forms import AuthForm, ImageForm, SignUpForm, RecoverForm, AddGoalForm, SearchForm, DeleteGoalForm
-from .models import Avatar, ChooseGoals, Friends
+from .models import Avatar, ChooseGoals, Friends, FriendRequests
 
 # Create your views here.
 
@@ -142,9 +142,9 @@ def adding_goal(request):
             else:
                 cg = ChooseGoals(user=request.user, goal=picked, level=level)
                 cg.save()
-            return redirect('/')
+            return redirect('../profile/')
         else:
-            return redirect('/')
+            return redirect('../profile/')
     else:
         form = AddGoalForm()
         context = {'form': form}
@@ -198,21 +198,21 @@ def show_profile(request, id):
         context['error'] = True
         return redirect('/')
     target_user = lst.first()
-    user_friends = Friends.object.filter(out_user=request.user)
+    user_friends = Friends.objects.filter(out_user=request.user)
     context['is_friend'] = target_user in user_friends
     context['friend'] = target_user
     return render(request, 'web/show_profile.html', context)
 
 
 @login_required
-def add_friend(request, id):
+def make_friend_request(request, id):
     lst = User.objects.filter(id=id)
     if not len(lst):
         return redirect('/')
     target_user = lst.first()
-    user_friends = Friends.object.filter(out_user=request.user)
+    user_friends = Friends.objects.filter(out_user=request.user)
     if id != request.user.id and target_user not in user_friends:
-        friendship = Friends(out_user=request.user, in_user=target_user)
+        friendship = FriendRequests(out_user=request.user, in_user=target_user)
         friendship.save()
     return redirect('profile/{}'.format(id))
 
@@ -234,3 +234,34 @@ def delete_goal(request):
         form = DeleteGoalForm()
         context = {'form': form}
         return render(request, 'web/delete_goal.html', context)
+
+
+@login_required
+def show_friend_request(request):
+    context = {'friend_request': FriendRequests.objects.filter(in_user=request.user)}
+    return render(request, 'web/friend_requests.html', context)
+
+
+@login_required
+def allow_friend_request(request, request_id):
+    fr_rq = FriendRequests.objects.filter(id=request_id)
+    if not len(fr_rq):
+        return redirect('/')
+    friend = User.objects.filter(id=fr_rq.user.id).first()
+    friendship_1 = Friends(in_user=request.user, out_user=friend)
+    friendship_2 = Friends(out_user=request.user, in_user=friend)
+    friendship_2.save()
+    friendship_1.save()
+    fr = fr_rq.first()
+    fr.delete()
+    return redirect('profile/')
+
+
+@login_required
+def decline_friend_request(request, request_id):
+    lst = FriendRequests.objects.filter(id=request_id)
+    if not len(lst):
+        return redirect('/')
+    friendship = lst.first()
+    friendship.delete()
+    return redirect('profile/')

@@ -14,6 +14,9 @@ urlpatterns = [
     path('addgoals/', views.adding_goal, name='add_goal'),
     path('search/', views.search_sport, name='search_sport'),
     path('profile/<int:id>', views.show_profile, name='show_profile'),
-    path('profile/<int:id>/add', views.add_friend, name='add_friend'),
+    path('profile/<int:id>/add', views.make_friend_request, name='make_friend_request'),
     path('deletegoals/', views.delete_goal, name='delete_goal'),
+    path('profile/requests', views.show_friend_request, name='show_requests'),
+    path('profile/requests/<int:request_id>/allow', views.allow_friend_request, name='allow_request'),
+    path('profile/requests/<int:request_id>/decline', views.decline_friend_request, name='decline_request'),
 ]
