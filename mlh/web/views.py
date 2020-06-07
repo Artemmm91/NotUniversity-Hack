@@ -197,8 +197,14 @@ def show_profile(request, id):
         return redirect('/')
     target_user = lst.first()
     user_friends = Friends.objects.filter(out_user=request.user)
+    user_requests = FriendRequests.objects.filter(out_user=request.user, in_user=target_user)
     context['is_friend'] = target_user in user_friends
+    context['is_requested'] = False
+    if len(user_requests):
+        context['is_requested'] = True
     context['friend'] = target_user
+    context['goals'] = [x.goals for x in ChooseGoals.objects.filter(user=target_user)]
+    context['avatar'] = Avatar.objects.filter(user=request.user).first()
     return render(request, 'web/show_profile.html', context)
 
 
@@ -209,7 +215,8 @@ def make_friend_request(request, id):
         return redirect('/')
     target_user = lst.first()
     user_friends = Friends.objects.filter(out_user=request.user)
-    if id != request.user.id and target_user not in user_friends:
+    user_requests = FriendRequests.objects.filter(out_user=request.user)
+    if id != request.user.id and target_user not in user_friends and not len(user_requests):
         friendship = FriendRequests(out_user=request.user, in_user=target_user)
         friendship.save()
     return redirect('profile/{}'.format(id))
