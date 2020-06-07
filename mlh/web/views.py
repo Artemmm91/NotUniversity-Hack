@@ -204,7 +204,9 @@ def show_profile(request, id):
         context['is_requested'] = True
     context['friend'] = target_user
     context['goals'] = ChooseGoals.objects.filter(user=target_user)
-    context['avatar'] = Avatar.objects.filter(user=request.user).first()
+    image = Avatar.objects.filter(user=target_user).first()
+    image = str(image.img) if image is not None else 'web/static/avatars/default.png'
+    context['avatar'] = image[11:]
     return render(request, 'web/show_profile.html', context)
 
 

@@ -23,6 +23,8 @@
         <div class="col-8">
             <div class="row">
                 <div class="col-6">
+                    {% load static %}
+                    <img alt="avatar" height="225" src="{% static avatar %}" width="225">
 
                     {% if is_friend %}
                         <h4> Is your friend </h4>
