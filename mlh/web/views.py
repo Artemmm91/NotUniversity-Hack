@@ -227,9 +227,9 @@ def delete_goal(request):
             if len(lst):
                 lst = lst.first()
                 lst.delete()
-            return redirect('profile/')
+            return redirect('../profile/')
         else:
-            return redirect('profile/')
+            return redirect('../profile/')
     else:
         form = DeleteGoalForm()
         context = {'form': form}
