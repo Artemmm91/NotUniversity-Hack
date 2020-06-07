@@ -9,12 +9,14 @@
         {% if error %}
             <h4>Oops :(</h4><br/>
         {% else %}
+            <ul class="list-group">
             {% for var in ans %}
-                <li>
+                <li class="list-group-item">
                     <label>{{ var.user }} </label>
                     <label>{{ var.level }} </label>
                 </li>
-            {% endfor %}
+                {% endfor %}
+            </ul>
         {% endif %}
     {% else %}
         {% bootstrap_form form %}
