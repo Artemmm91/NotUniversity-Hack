@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 import os
 from string import ascii_letters, digits
 
-from .forms import AuthForm, ImageForm, SignUpForm, RecoverForm, AddGoalForm, SearchForm
+from .forms import AuthForm, ImageForm, SignUpForm, RecoverForm, AddGoalForm, SearchForm, DeleteGoalForm
 from .models import Avatar, ChooseGoals, Friends
 
 # Create your views here.
@@ -214,4 +214,23 @@ def add_friend(request, id):
     if id != request.user.id and target_user not in user_friends:
         friendship = Friends(out_user=request.user, in_user=target_user)
         friendship.save()
-    return redirect('/profile/{}'.format(id))
+    return redirect('profile/{}'.format(id))
+
+
+@login_required
+def delete_goal(request):
+    if request.method == 'POST':
+        form = DeleteGoalForm(request.POST)
+        if form.is_valid():
+            picked = form.cleaned_data.get('picked')
+            lst = ChooseGoals.objects.filter(user=request.user, goal=picked)
+            if len(lst):
+                lst = lst.first()
+                lst.delete()
+            return redirect('profile/')
+        else:
+            return redirect('profile/')
+    else:
+        form = DeleteGoalForm()
+        context = {'form': form}
+        return render(request, 'web/delete_goal.html', context)

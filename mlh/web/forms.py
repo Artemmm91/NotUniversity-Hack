@@ -32,3 +32,7 @@ class AddGoalForm(forms.Form):
 
 class SearchForm(forms.Form):
     search = forms.ChoiceField(choices=CHOICES, required=True, label="Choose a sport you want to upgrade")
+
+
+class DeleteGoalForm(forms.Form):
+    picked = forms.ChoiceField(choices=CHOICES, required=True, label="Choose your goal, that you want to delete")
