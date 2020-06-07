@@ -279,9 +279,9 @@ def add_post(request):
     if request.method == 'POST':
         form = AddPostForm(request.POST)
         if form.is_valid():
-            text = form.cleaned_data.get('text')
             name = form.cleaned_data.get('name')
-            pst = Post(text=text, name=name)
+            text = form.cleaned_data.get('text')
+            pst = Post(name=name, text=text, user=request.user)
             pst.save()
             return redirect('../profile/')
         else:

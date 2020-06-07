@@ -39,5 +39,5 @@ class DeleteGoalForm(forms.Form):
 
 
 class AddPostForm(forms.Form):
-    text = forms.CharField(label='What would you like to post today?')
     name = forms.CharField(label='How would you like to name your post?')
+    text = forms.CharField(label='What would you like to post today?')
