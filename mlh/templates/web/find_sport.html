@@ -11,8 +11,8 @@
         {% else %}
             <ul class="list-group">
             {% for var in ans %}
-                <li class="list-group-item">
-                    <label>{{ var.user }} </label>
+                <li>
+                    <label><a href="../profile/{{ var.user.id }}">{{ var.user }} </a></label>
                     <label>{{ var.level }} </label>
                 </li>
                 {% endfor %}

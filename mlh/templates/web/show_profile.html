@@ -1,0 +1,41 @@
+{% extends "../partials/base.html" %}
+{% block content %}
+{% load bootstrap4 %}
+<div class="row">
+    {% if error%}
+        <h1> Oops :( </h1><br/>
+        <h1> User not found </h1>
+    {% else %}
+        <div class="col-4">
+            <h1 class="col-4">{{ friend.username }}</h1>
+            <p>
+            <h4 class="col-12"> {{ friend.username }}'s goals:</h4>
+            <ul class="ml-2">
+                {% for goal in friend.goals %}
+                <li>
+                    <label>{{ goal.goal }} </label>
+                    <label>{{ goal.level }} </label>
+                </li>
+                {% endfor %}
+            </ul>
+            </p>
+        </div>
+        <div class="col-8">
+            <div class="row">
+                <div class="col-4">
+                    {% load static %}
+                    <img alt="avatar" height="225" src="{% static avatar %}" width="225">
+                    {% if is_friend %}
+                        <h3> Is your friend </h3>
+                    {% else %}
+                        <a class="btn btn-outline-primary mt-3" href="{% url 'web:add_friend' friend.id %}" role="button">Add to friends list</a>
+                    {% endif %}
+                </div>
+                <div class="col-8">
+                </div>
+            </div>
+        </div>
+    {% endif %}
+</div>
+
+{% endblock %}
