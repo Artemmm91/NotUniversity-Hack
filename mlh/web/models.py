@@ -22,4 +22,11 @@ class FriendRequests(models.Model):
     out_user = models.ForeignKey(User, on_delete=models.PROTECT, related_name="creator_request")
     in_user = models.ForeignKey(User, on_delete=models.PROTECT, related_name="victim_request")
 
+
+class Post(models.Model):
+    user = models.ForeignKey(User, on_delete=models.PROTECT)
+    name = models.CharField(max_length=50)
+    text = models.CharField(max_length=280)
+    date_time = models.DateTimeField(auto_now=True)
+
 # Create your models here.

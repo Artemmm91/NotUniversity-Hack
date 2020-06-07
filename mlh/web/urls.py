@@ -19,4 +19,7 @@ urlpatterns = [
     path('profile/requests', views.show_friend_request, name='show_requests'),
     path('profile/requests/<int:request_id>/allow', views.allow_friend_request, name='allow_request'),
     path('profile/requests/<int:request_id>/decline', views.decline_friend_request, name='decline_request'),
+    path('posts/', views.show_all_posts, name='show_all_posts'),
+    path('add_post/', views.add_post, name='add_post'),
+    path('post/<int:post_id>', views.show_post, name='show_post')
 ]

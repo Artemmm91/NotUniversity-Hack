@@ -36,3 +36,8 @@ class SearchForm(forms.Form):
 
 class DeleteGoalForm(forms.Form):
     picked = forms.ChoiceField(choices=CHOICES, required=True, label="Choose your goal, that you want to delete")
+
+
+class AddPostForm(forms.Form):
+    text = forms.CharField(label='What would you like to post today?')
+    name = forms.CharField(label='How would you like to name your post?')

@@ -9,8 +9,8 @@ from django.contrib.auth.models import User
 import os
 from string import ascii_letters, digits
 
-from .forms import AuthForm, ImageForm, SignUpForm, RecoverForm, AddGoalForm, SearchForm, DeleteGoalForm
-from .models import Avatar, ChooseGoals, Friends, FriendRequests
+from .forms import AuthForm, ImageForm, SignUpForm, RecoverForm, AddGoalForm, SearchForm, DeleteGoalForm, AddPostForm
+from .models import Avatar, ChooseGoals, Friends, FriendRequests, Post
 
 # Create your views here.
 
@@ -270,3 +270,41 @@ def decline_friend_request(request, request_id):
     friendship = lst.first()
     friendship.delete()
     return redirect('profile/')
+
+
+@login_required
+def add_post(request):
+    if request.method == 'POST':
+        form = AddPostForm(request.POST)
+        if form.is_valid():
+            text = form.cleaned_data.get('text')
+            name = form.cleaned_data.get('name')
+            pst = Post(text=text, name=name)
+            pst.save()
+            return redirect('../profile/')
+        else:
+            return redirect('../profile/')
+    else:
+        form = AddPostForm()
+        context = {'form': form}
+        return render(request, 'web/add_post.html', context)
+
+
+@login_required
+def show_post(request, post_id):
+    context = {'id': id}
+    lst = Post.objects.filter(id=post_id)
+    if not len(lst):
+        return redirect('/')
+    pst = lst.first()
+    context['post'] = pst
+    return render(request, 'web/show_post.html', context)
+
+
+@login_required
+def show_all_posts(request):
+    context = {}
+    posts = Post.objects.filter()[:100]
+    context['posts'] = posts
+    return render(request, 'web/all_posts.html', context)
+
