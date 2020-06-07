@@ -24,6 +24,7 @@
                     {% load static %}
                     <img alt="avatar" height="225" src="{% static avatar %}" width="225">
                     <a class="btn btn-outline-primary mt-3" href="{% url 'web:change_password' %}" role="button">Change Password</a>
+                    <a class="btn btn-outline-primary mt-3" href="{% url 'web:show_requests' %}" role="button">Friend requests</a>
                 </div>
                 <div class="col-8">
                     <form method="POST" enctype="multipart/form-data">

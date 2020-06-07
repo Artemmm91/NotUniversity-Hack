@@ -196,7 +196,7 @@ def show_profile(request, id):
         context['error'] = True
         return redirect('/')
     target_user = lst.first()
-    user_friends = Friends.objects.filter(out_user=request.user)
+    user_friends = [x.in_user for x in Friends.objects.filter(out_user=request.user)]
     user_requests = FriendRequests.objects.filter(out_user=request.user, in_user=target_user)
     context['is_friend'] = target_user in user_friends
     context['is_requested'] = False
@@ -252,14 +252,14 @@ def allow_friend_request(request, request_id):
     fr_rq = FriendRequests.objects.filter(id=request_id)
     if not len(fr_rq):
         return redirect('/')
-    friend = User.objects.filter(id=fr_rq.user.id).first()
+    fr_rq = fr_rq.first()
+    friend = User.objects.filter(id=fr_rq.out_user.id).first()
     friendship_1 = Friends(in_user=request.user, out_user=friend)
     friendship_2 = Friends(out_user=request.user, in_user=friend)
     friendship_2.save()
     friendship_1.save()
-    fr = fr_rq.first()
-    fr.delete()
-    return redirect('profile/')
+    fr_rq.delete()
+    return redirect('../../')
 
 
 @login_required
