@@ -1,49 +1,12 @@
-# NotUniversity-Hack
+# Athletic2gether
 
-Наш проект к хакатону. Я пока начну делать шаблон сайта и когда закончу напишу как его запускать у себя
+You will be able to participate in workouts with people sharing the same interests in sports as you do, on this website! Find users with approximately equal levels in diverse activities, add them to your friends, contact them via email, and start training!
 
+How does this website work?
+Here is how!
 
-Что нужно для запуска проекта
--------------
+1) Create your personal profile
+2) Add activities from a moderate number of different exercises. Indicate your current level in each one of them to allow us find proper friends for you.
+3) Share the story of your success with others by creating posts!
 
-- Установите все необходимые пакеты:
-Если у вас Линукс:
-```
-sudo apt-get install git
-sudo apt-get install python3-virtualenv virtualenv  
-```
-VirtualEnv можно скачать и через pip, а git через сайт
-```
-pip install virtualenv
-```
-
-- Склонируйте проект с GitHub
-- Создайте и запустите отдельное виртуальное окружение(указывать собственную папку расположения питона):
-```
-mkdir ~/venvs
-cd ~/venvs
-virtualenv -p /usr/bin/python3 mlh_hack_env
-source ~/venvs/mlh_hack_env/bin/activate
-```
-Или создайте автоматически в PyCharm
-- Перейдите в папку проекта (предположим, что она находится прямо в домашней): 
-```
-cd ~/NotUnoversity-Hack
-```
-- Установите все необходимые пакеты: 
-```
-pip install -r mlh/requirements.txt
-```
-- Запустите процесс инициализации БД: 
-```
-python mlh/manage.py makemigrations
-python mlh/manage.py migrate
-```
-
-- Настройте проект в PyCharm:
-  - File->New project
-  - Путь к папке проекта: ~/NotUnoversity-Hack
-  - Интерпретатор: Add local -> Выбираем "~/venvs/mlh_hack_env/bin/python3" -> Ok -> Ждём, пока окружение проиндексируется
-  - Нажимаем Ok и соглашаемся с предложением создать проект из существующих исходников
-  - Добавляем конфигурацию запуска: "Edit configurations" -> "+" - > Python -> Имя скрипта: mlh/manage.py -> параметр "runserver" -> Apply -> Ok
-- Проект готов к запуску.
+Looking forward to many nice workouts for you! 
